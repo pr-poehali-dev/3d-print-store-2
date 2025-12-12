@@ -447,6 +447,134 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-secondary/20 text-secondary border-secondary/50">Тарифы</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-purple">Примерная стоимость</h2>
+            <p className="text-muted-foreground text-lg">Цены зависят от сложности модели и тиража</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300 hover:scale-105">
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-xl flex items-center justify-center">
+                    <Icon name="Cpu" className="text-primary" size={32} />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">FDM печать</h3>
+                  <p className="text-muted-foreground text-sm">Пластиковые детали</p>
+                </div>
+                <div className="text-center mb-6">
+                  <div className="text-4xl font-bold text-primary mb-2">от 50₽</div>
+                  <div className="text-sm text-muted-foreground">за грамм</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={16} />
+                    <span className="text-sm">PLA, ABS, PETG</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={16} />
+                    <span className="text-sm">Срок: 1-3 дня</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={16} />
+                    <span className="text-sm">Точность 0.1-0.2мм</span>
+                  </div>
+                </div>
+                <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-full bg-primary/20 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/50">
+                      Заказать
+                    </Button>
+                  </DialogTrigger>
+                </Dialog>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card border-primary/50 border-2 hover:border-primary transition-all duration-300 hover:scale-105 relative overflow-hidden">
+              <div className="absolute top-4 right-4">
+                <Badge className="bg-primary text-primary-foreground">Популярно</Badge>
+              </div>
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-xl flex items-center justify-center">
+                    <Icon name="Sparkles" className="text-primary" size={32} />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">SLA печать</h3>
+                  <p className="text-muted-foreground text-sm">Высокая детализация</p>
+                </div>
+                <div className="text-center mb-6">
+                  <div className="text-4xl font-bold text-primary mb-2">от 150₽</div>
+                  <div className="text-sm text-muted-foreground">за грамм</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={16} />
+                    <span className="text-sm">Фотополимерная смола</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={16} />
+                    <span className="text-sm">Срок: 2-4 дня</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={16} />
+                    <span className="text-sm">Точность 0.025мм</span>
+                  </div>
+                </div>
+                <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                      Заказать
+                    </Button>
+                  </DialogTrigger>
+                </Dialog>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300 hover:scale-105">
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-xl flex items-center justify-center">
+                    <Icon name="Zap" className="text-primary" size={32} />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">SLS печать</h3>
+                  <p className="text-muted-foreground text-sm">Промышленная прочность</p>
+                </div>
+                <div className="text-center mb-6">
+                  <div className="text-4xl font-bold text-primary mb-2">от 300₽</div>
+                  <div className="text-sm text-muted-foreground">за грамм</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={16} />
+                    <span className="text-sm">Nylon, TPU</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={16} />
+                    <span className="text-sm">Срок: 3-7 дней</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={16} />
+                    <span className="text-sm">Без поддержек</span>
+                  </div>
+                </div>
+                <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-full bg-primary/20 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/50">
+                      Заказать
+                    </Button>
+                  </DialogTrigger>
+                </Dialog>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="text-center mt-8">
+            <p className="text-muted-foreground">* Точная стоимость рассчитывается индивидуально после анализа модели</p>
+          </div>
+        </div>
+      </section>
+
       <section id="отзывы" className="py-20 px-4 bg-card/30">
         <div className="container mx-auto">
           <div className="text-center mb-12">
@@ -501,7 +629,7 @@ const Index = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Email</p>
-                    <p className="font-bold">info@3dprintlab.ru</p>
+                    <p className="font-bold">rutra93525@gmail.com</p>
                   </div>
                 </div>
               </Card>
@@ -512,21 +640,11 @@ const Index = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Телефон</p>
-                    <p className="font-bold">+7 (495) 123-45-67</p>
+                    <p className="font-bold">+7 919 623 25 80</p>
                   </div>
                 </div>
               </Card>
-              <Card className="bg-card border-border p-6 hover:border-primary/50 transition-all duration-300">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Icon name="MapPin" className="text-primary" size={24} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Адрес</p>
-                    <p className="font-bold">Москва, ул. Инновационная, 42</p>
-                  </div>
-                </div>
-              </Card>
+
             </div>
             <Card className="bg-card border-border p-8">
               <h3 className="text-2xl font-bold mb-6">О нас</h3>
