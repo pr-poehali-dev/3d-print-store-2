@@ -104,17 +104,7 @@ const Index = () => {
     { icon: 'Scan', title: '3D Сканирование', description: 'Оцифровка реальных объектов' },
   ];
 
-  const catalog = [
-    { name: 'Prusa i3 MK3S+', price: '85 000 ₽', specs: 'FDM • 250×210×210мм', image: 'https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/0b49b652-f27a-4db3-86ce-9d3c5d0a2ed2.jpg' },
-    { name: 'Formlabs Form 3', price: '320 000 ₽', specs: 'SLA • 145×145×185мм', image: 'https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/a01633c7-ed8d-49ad-a951-06a3a776dbf3.jpg' },
-    { name: 'Ultimaker S5', price: '550 000 ₽', specs: 'FDM • 330×240×300мм', image: 'https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/0585aeb5-07cb-4d74-b46b-f5dd13b1ecd2.jpg' },
-  ];
 
-  const portfolio = [
-    { title: 'Прототип корпуса', category: 'Промышленность', image: 'https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/0b49b652-f27a-4db3-86ce-9d3c5d0a2ed2.jpg' },
-    { title: 'Архитектурный макет', category: 'Архитектура', image: 'https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/a01633c7-ed8d-49ad-a951-06a3a776dbf3.jpg' },
-    { title: 'Медицинская модель', category: 'Медицина', image: 'https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/0585aeb5-07cb-4d74-b46b-f5dd13b1ecd2.jpg' },
-  ];
 
   const reviews = [
     { name: 'Алексей Иванов', rating: 5, text: 'Отличное качество печати! Заказывали прототип корпуса для электроники. Все детали четкие, сборка идеальная.', avatar: 'АИ', project: 'Корпус устройства', image: 'https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/0b49b652-f27a-4db3-86ce-9d3c5d0a2ed2.jpg' },
@@ -131,7 +121,7 @@ const Index = () => {
             <span className="text-2xl font-bold glow-cyan">3D PRINT LAB</span>
           </div>
           <div className="hidden md:flex items-center gap-6">
-            {['Главная', 'Услуги', 'Каталог', 'Портфолио', 'Отзывы', 'Контакты'].map((item) => (
+            {['Главная', 'Услуги', 'Отзывы', 'Контакты'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -313,63 +303,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="каталог" className="py-20 px-4">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-primary/20 text-primary border-primary/50">Оборудование</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-cyan">Каталог принтеров</h2>
-            <p className="text-muted-foreground text-lg">Премиальное оборудование для профессионалов</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {catalog.map((item, i) => (
-              <Card key={i} className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all duration-300 hover:scale-105 group animate-fade-in" style={{ animationDelay: `${i * 0.15}s` }}>
-                <div className="relative overflow-hidden h-64">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">{item.name}</h3>
-                  <p className="text-muted-foreground mb-4">{item.specs}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-3xl font-bold text-primary">{item.price}</span>
-                    <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
-                      <DialogTrigger asChild>
-                        <Button className="bg-primary/20 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/50">
-                          Купить
-                        </Button>
-                      </DialogTrigger>
-                    </Dialog>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section id="портфолио" className="py-20 px-4 bg-card/30">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-secondary/20 text-secondary border-secondary/50">Наши работы</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-purple">Портфолио</h2>
-            <p className="text-muted-foreground text-lg">Проекты, которыми мы гордимся</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {portfolio.map((item, i) => (
-              <Card key={i} className="bg-card border-border overflow-hidden hover:border-secondary/50 transition-all duration-300 group animate-fade-in" style={{ animationDelay: `${i * 0.1}s` }}>
-                <div className="relative overflow-hidden h-80">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <Badge className="mb-2 bg-secondary/80">{item.category}</Badge>
-                    <h3 className="text-xl font-bold">{item.title}</h3>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section id="отзывы" className="py-20 px-4">
         <div className="container mx-auto">
