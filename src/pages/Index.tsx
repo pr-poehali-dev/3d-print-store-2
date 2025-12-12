@@ -190,9 +190,6 @@ const Index = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="fdm">FDM (пластик)</SelectItem>
-                        <SelectItem value="sla">SLA (фотополимер)</SelectItem>
-                        <SelectItem value="sls">SLS (порошок)</SelectItem>
-                        <SelectItem value="metal">Металл</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
