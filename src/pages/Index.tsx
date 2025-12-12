@@ -14,6 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [orderDialogOpen, setOrderDialogOpen] = useState(false);
+  const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
   const { toast } = useToast();
   
   const [orderForm, setOrderForm] = useState({
@@ -24,6 +25,14 @@ const Index = () => {
     material: '',
     description: '',
     file: null as File | null
+  });
+
+  const [reviewForm, setReviewForm] = useState({
+    name: '',
+    email: '',
+    rating: 5,
+    project: '',
+    text: ''
   });
 
   const handleOrderSubmit = async (e: React.FormEvent) => {
@@ -90,6 +99,24 @@ const Index = () => {
         variant: 'destructive'
       });
     }
+  };
+
+  const handleReviewSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    toast({
+      title: 'Отзыв отправлен!',
+      description: 'Спасибо за ваш отзыв! Мы опубликуем его после модерации.',
+    });
+    
+    setReviewDialogOpen(false);
+    setReviewForm({
+      name: '',
+      email: '',
+      rating: 5,
+      project: '',
+      text: ''
+    });
   };
 
   const scrollToSection = (id: string) => {
@@ -451,7 +478,7 @@ const Index = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-cyan">Отзывы</h2>
             <p className="text-muted-foreground text-lg">Реальные результаты наших проектов</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
             {reviews.map((review, i) => (
               <Card key={i} className="bg-card border-border hover:border-primary/50 transition-all duration-300 animate-fade-in" style={{ animationDelay: `${i * 0.1}s` }}>
                 <CardContent className="p-6">
@@ -478,6 +505,96 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+          <div className="text-center">
+            <Dialog open={reviewDialogOpen} onOpenChange={setReviewDialogOpen}>
+              <DialogTrigger asChild>
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 border-glow">
+                  <Icon name="MessageSquare" className="mr-2" size={20} />
+                  Оставить отзыв
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-bold">Оставить отзыв</DialogTitle>
+                  <DialogDescription>
+                    Поделитесь своим опытом работы с нами
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleReviewSubmit} className="space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="review-name">Имя *</Label>
+                      <Input
+                        id="review-name"
+                        placeholder="Ваше имя"
+                        required
+                        value={reviewForm.name}
+                        onChange={(e) => setReviewForm({...reviewForm, name: e.target.value})}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="review-email">Email *</Label>
+                      <Input
+                        id="review-email"
+                        type="email"
+                        placeholder="your@email.com"
+                        required
+                        value={reviewForm.email}
+                        onChange={(e) => setReviewForm({...reviewForm, email: e.target.value})}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="review-project">Название проекта *</Label>
+                    <Input
+                      id="review-project"
+                      placeholder="Например: Корпус устройства"
+                      required
+                      value={reviewForm.project}
+                      onChange={(e) => setReviewForm({...reviewForm, project: e.target.value})}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Оценка *</Label>
+                    <div className="flex gap-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setReviewForm({...reviewForm, rating: star})}
+                          className="transition-all duration-200"
+                        >
+                          <Icon
+                            name="Star"
+                            size={32}
+                            className={star <= reviewForm.rating ? "text-primary fill-primary" : "text-muted-foreground"}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="review-text">Ваш отзыв *</Label>
+                    <Textarea
+                      id="review-text"
+                      placeholder="Расскажите о вашем опыте работы с нами..."
+                      required
+                      rows={5}
+                      value={reviewForm.text}
+                      onChange={(e) => setReviewForm({...reviewForm, text: e.target.value})}
+                    />
+                  </div>
+
+                  <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                    Отправить отзыв
+                  </Button>
+                </form>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </section>
