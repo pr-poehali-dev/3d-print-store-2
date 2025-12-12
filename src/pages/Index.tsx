@@ -4,9 +4,45 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [orderDialogOpen, setOrderDialogOpen] = useState(false);
+  const { toast } = useToast();
+  
+  const [orderForm, setOrderForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    technology: '',
+    material: '',
+    description: '',
+    file: null as File | null
+  });
+
+  const handleOrderSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({
+      title: 'Заказ отправлен!',
+      description: 'Мы свяжемся с вами в ближайшее время.',
+    });
+    setOrderDialogOpen(false);
+    setOrderForm({
+      name: '',
+      email: '',
+      phone: '',
+      technology: '',
+      material: '',
+      description: '',
+      file: null
+    });
+  };
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
@@ -57,9 +93,120 @@ const Index = () => {
               </button>
             ))}
           </div>
-          <Button className="bg-primary text-primary-foreground hover:bg-primary/90 border-glow">
-            Заказать
-          </Button>
+          <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 border-glow">
+                Заказать
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold">Заказать 3D печать</DialogTitle>
+                <DialogDescription>
+                  Заполните форму, и мы рассчитаем стоимость вашего проекта
+                </DialogDescription>
+              </DialogHeader>
+              <form onSubmit={handleOrderSubmit} className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Имя *</Label>
+                    <Input
+                      id="name"
+                      placeholder="Иван Иванов"
+                      required
+                      value={orderForm.name}
+                      onChange={(e) => setOrderForm({...orderForm, name: e.target.value})}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Телефон *</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="+7 (999) 123-45-67"
+                      required
+                      value={orderForm.phone}
+                      onChange={(e) => setOrderForm({...orderForm, phone: e.target.value})}
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="ivan@example.com"
+                    required
+                    value={orderForm.email}
+                    onChange={(e) => setOrderForm({...orderForm, email: e.target.value})}
+                  />
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="technology">Технология печати *</Label>
+                    <Select required onValueChange={(value) => setOrderForm({...orderForm, technology: value})}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите технологию" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="fdm">FDM (пластик)</SelectItem>
+                        <SelectItem value="sla">SLA (фотополимер)</SelectItem>
+                        <SelectItem value="sls">SLS (порошок)</SelectItem>
+                        <SelectItem value="metal">Металл</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="material">Материал</Label>
+                    <Select onValueChange={(value) => setOrderForm({...orderForm, material: value})}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите материал" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="pla">PLA</SelectItem>
+                        <SelectItem value="abs">ABS</SelectItem>
+                        <SelectItem value="petg">PETG</SelectItem>
+                        <SelectItem value="nylon">Nylon</SelectItem>
+                        <SelectItem value="resin">Фотополимер</SelectItem>
+                        <SelectItem value="tpu">TPU (гибкий)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="description">Описание проекта *</Label>
+                  <Textarea
+                    id="description"
+                    placeholder="Опишите, что нужно напечатать: размеры, количество, цвет, особые требования..."
+                    rows={4}
+                    required
+                    value={orderForm.description}
+                    onChange={(e) => setOrderForm({...orderForm, description: e.target.value})}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="file">Загрузить 3D модель (STL, OBJ)</Label>
+                  <Input
+                    id="file"
+                    type="file"
+                    accept=".stl,.obj,.step,.stp"
+                    onChange={(e) => setOrderForm({...orderForm, file: e.target.files?.[0] || null})}
+                  />
+                  <p className="text-xs text-muted-foreground">Если у вас нет модели, мы можем её создать</p>
+                </div>
+
+                <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 border-glow">
+                  <Icon name="Send" className="mr-2" size={18} />
+                  Отправить заявку
+                </Button>
+              </form>
+            </DialogContent>
+          </Dialog>
         </div>
       </nav>
 
@@ -79,10 +226,14 @@ const Index = () => {
             Воплощаем ваши идеи в реальность с помощью передовых технологий 3D печати
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 border-glow text-lg px-8 py-6">
-              <Icon name="Rocket" className="mr-2" size={20} />
-              Начать проект
-            </Button>
+            <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 border-glow text-lg px-8 py-6">
+                  <Icon name="Rocket" className="mr-2" size={20} />
+                  Начать проект
+                </Button>
+              </DialogTrigger>
+            </Dialog>
             <Button size="lg" variant="outline" className="border-primary/50 hover:bg-primary/10 text-lg px-8 py-6">
               <Icon name="Play" className="mr-2" size={20} />
               Смотреть видео
@@ -133,9 +284,13 @@ const Index = () => {
                   <p className="text-muted-foreground mb-4">{item.specs}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-3xl font-bold text-primary">{item.price}</span>
-                    <Button className="bg-primary/20 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/50">
-                      Купить
-                    </Button>
+                    <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
+                      <DialogTrigger asChild>
+                        <Button className="bg-primary/20 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/50">
+                          Купить
+                        </Button>
+                      </DialogTrigger>
+                    </Dialog>
                   </div>
                 </CardContent>
               </Card>
