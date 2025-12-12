@@ -303,9 +303,151 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-primary/20 text-primary border-primary/50">Технологии</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-cyan">Наши возможности</h2>
+            <p className="text-muted-foreground text-lg">Современное оборудование и материалы</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <Card className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all duration-300 group">
+              <div className="relative h-64 overflow-hidden">
+                <img src="https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/6c1312a0-5f87-4776-942e-eacb32c57114.jpg" alt="FDM технология" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-2xl font-bold mb-2">FDM печать</h3>
+                  <p className="text-sm text-muted-foreground">Послойное нанесение пластика. Идеально для прототипов и функциональных деталей.</p>
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={18} />
+                    <span className="text-sm">Точность до 0.1 мм</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={18} />
+                    <span className="text-sm">Размеры до 300×300×400 мм</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={18} />
+                    <span className="text-sm">PLA, ABS, PETG, TPU</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
+            <Card className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all duration-300 group">
+              <div className="relative h-64 overflow-hidden">
+                <img src="https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/b7adaf62-3d3f-4768-8b90-0850efa5bd40.jpg" alt="SLA технология" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-2xl font-bold mb-2">SLA печать</h3>
+                  <p className="text-sm text-muted-foreground">Фотополимерная смола высокой детализации. Для ювелирки и медицины.</p>
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={18} />
+                    <span className="text-sm">Точность до 0.025 мм</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={18} />
+                    <span className="text-sm">Гладкая поверхность</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={18} />
+                    <span className="text-sm">Прозрачные материалы</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-      <section id="отзывы" className="py-20 px-4">
+            <Card className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all duration-300 group">
+              <div className="relative h-64 overflow-hidden">
+                <img src="https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/39b0dce0-4d63-465d-897e-4e82ce881512.jpg" alt="SLS технология" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-2xl font-bold mb-2">SLS печать</h3>
+                  <p className="text-sm text-muted-foreground">Лазерное спекание порошка. Максимальная прочность и сложные формы.</p>
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={18} />
+                    <span className="text-sm">Без поддержек</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={18} />
+                    <span className="text-sm">Высокая прочность</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" className="text-primary" size={18} />
+                    <span className="text-sm">Nylon, TPU, композиты</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-3xl font-bold mb-6 glow-purple">Почему выбирают нас</h3>
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="Zap" className="text-primary" size={24} />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-2">Скорость производства</h4>
+                    <p className="text-muted-foreground">Печатаем прототипы за 24 часа. Серийные партии — от 3 дней.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="Award" className="text-primary" size={24} />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-2">Качество гарантировано</h4>
+                    <p className="text-muted-foreground">Контроль на каждом этапе. Переделаем бесплатно при браке.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="Users" className="text-primary" size={24} />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-2">Экспертная поддержка</h4>
+                    <p className="text-muted-foreground">Поможем с выбором технологии и оптимизацией модели.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon name="DollarSign" className="text-primary" size={24} />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-2">Прозрачное ценообразование</h4>
+                    <p className="text-muted-foreground">Точный расчёт стоимости до начала работ. Без скрытых платежей.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <img src="https://cdn.poehali.dev/projects/61ee61e5-1fe7-4922-a461-2e8fcbc230e7/files/0b49b652-f27a-4db3-86ce-9d3c5d0a2ed2.jpg" alt="3D принтер" className="rounded-2xl border-2 border-primary/30 shadow-2xl" />
+              <div className="absolute -bottom-6 -right-6 bg-primary/20 backdrop-blur-sm rounded-xl p-6 border border-primary/50">
+                <div className="text-4xl font-bold text-primary mb-1">500+</div>
+                <div className="text-sm text-muted-foreground">Выполненных проектов</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="отзывы" className="py-20 px-4 bg-card/30">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-primary/20 text-primary border-primary/50">Что говорят клиенты</Badge>
