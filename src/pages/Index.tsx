@@ -204,9 +204,6 @@ const Index = () => {
                         <SelectItem value="pla">PLA</SelectItem>
                         <SelectItem value="abs">ABS</SelectItem>
                         <SelectItem value="petg">PETG</SelectItem>
-                        <SelectItem value="nylon">Nylon</SelectItem>
-                        <SelectItem value="resin">Фотополимер</SelectItem>
-                        <SelectItem value="tpu">TPU (гибкий)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
