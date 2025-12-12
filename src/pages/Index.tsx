@@ -26,22 +26,70 @@ const Index = () => {
     file: null as File | null
   });
 
-  const handleOrderSubmit = (e: React.FormEvent) => {
+  const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: 'Заказ отправлен!',
-      description: 'Мы свяжемся с вами в ближайшее время.',
-    });
-    setOrderDialogOpen(false);
-    setOrderForm({
-      name: '',
-      email: '',
-      phone: '',
-      technology: '',
-      material: '',
-      description: '',
-      file: null
-    });
+    
+    try {
+      let fileBase64 = '';
+      let fileName = '';
+      
+      if (orderForm.file) {
+        fileName = orderForm.file.name;
+        const reader = new FileReader();
+        fileBase64 = await new Promise<string>((resolve, reject) => {
+          reader.onload = () => {
+            const base64 = (reader.result as string).split(',')[1];
+            resolve(base64);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(orderForm.file!);
+        });
+      }
+      
+      const response = await fetch('https://functions.poehali.dev/7dfafe38-048e-4180-9807-6466b4d54fc5', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: orderForm.name,
+          email: orderForm.email,
+          phone: orderForm.phone,
+          technology: orderForm.technology,
+          material: orderForm.material,
+          description: orderForm.description,
+          file_base64: fileBase64,
+          file_name: fileName
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        toast({
+          title: 'Заказ отправлен!',
+          description: `Заказ №${data.order_id} успешно создан. Мы свяжемся с вами в ближайшее время.`,
+        });
+        setOrderDialogOpen(false);
+        setOrderForm({
+          name: '',
+          email: '',
+          phone: '',
+          technology: '',
+          material: '',
+          description: '',
+          file: null
+        });
+      } else {
+        throw new Error(data.error || 'Ошибка при отправке заказа');
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: error instanceof Error ? error.message : 'Не удалось отправить заказ',
+        variant: 'destructive'
+      });
+    }
   };
 
   const scrollToSection = (id: string) => {

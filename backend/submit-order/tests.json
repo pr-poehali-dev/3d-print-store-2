@@ -1,0 +1,21 @@
+{
+  "tests": [
+    {
+      "name": "Test order submission",
+      "method": "POST",
+      "body": {
+        "name": "Тест Тестов",
+        "email": "test@example.com",
+        "phone": "+7 999 123 45 67",
+        "technology": "fdm",
+        "material": "pla",
+        "description": "Тестовый заказ для проверки API"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
